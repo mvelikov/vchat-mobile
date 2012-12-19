@@ -1,0 +1,122 @@
+/*
+    Document   : style.css
+    Created on : Jun 30, 2012, 11:32:45 AM
+    Author     : mihata
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@import 'reset.css';
+
+/*basic*/
+
+.invisible {
+    display: none;
+}
+#main-wrapper,
+.wrapper {
+    width: 1024px;
+    margin: 0 auto;
+    clear: both;
+    height: 100%;
+    overflow: hidden;
+}
+.wrapper {padding: 10px 0;}
+#header {
+    height: 40px;
+    border-bottom: 1px dashed #e2e2e2;
+}
+#footer {border-top: 1px dashed #e2e2e2;}
+
+.form-wrapper {
+    float: left;
+    overflow: hidden;
+    width: 100%;
+    padding: 0 0 10px 0;
+}
+.row {
+    width: 1000px;
+    float: left;
+    clear: both;
+    margin: 5px;
+}
+.label {
+    width: 400px;
+    text-align: right;
+    float: left;
+}
+.field {
+    margin: 0 0 0 20px;
+    float: left;
+}
+.box {
+    width: 640px;
+
+    margin: 20px auto;
+}
+#message-box {
+    border: 1px dotted #E2E2E2;
+    box-shadow: 5px 5px 10px #888;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 480px;
+}
+.message {
+    width: 600px;
+    margin: 5px 20px;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    word-wrap: breal-word;
+    line-height: 25px;
+}
+.author {
+    font-weight: bolder;
+    font-size: 115%;
+}
+#load-last-messages {
+    margin: 5px 20px;
+    float: left;
+}
+#message-label {
+    width: 165px;
+    text-align: right;
+    float: left;
+}
+#message {
+    width: 540px;
+}
+#send {
+    width: 80px;
+    height: 70px;
+}
+#userfile {
+    margin: 0 0 0 185px;
+}
+.tips {
+    margin: 0 0 0 190px;
+}
+#overlay {
+    width: 101%;
+    height: 101%;
+    min-width: 1024px;
+    min-height: 1280px;
+    background-color: black;
+    opacity: 0.3;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 99999;
+    display: none;
+}
+#loader {
+    position: fixed;
+    left: 45%;
+    top: 50%;
+}
+#error-message {
+    margin-left: 300px;
+    display: none;
+}
+#user-box {
+    display: none;
+    font-weight: bold;
+}

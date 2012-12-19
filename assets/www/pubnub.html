@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Telerik PubNub Homework</title>
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$("#send").click(function () {
+					var text = $("#text").val();
+					$("#text").val('');
+					if (text != '') {
+						PUBNUB.publish({
+							channel : 'hello_homework',
+							message : text
+						});
+					}
+
+				});
+			});
+		</script>
+		<style>
+			.box {
+				border: 1px solid black;
+				width: 50%;
+				height: 400px;
+				overflow: auto;
+				clear: both;
+			}
+		</style>
+    </head>
+    <body>
+		<div pub-key="pub-0fe3be58-2601-4fba-b4b9-86af7844be5b" sub-key="sub-62ca94b0-b883-11e1-b535-e7b64b0eaf0b" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+		<script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
+		<script>(function(){
+
+			// LISTEN FOR MESSAGES
+			PUBNUB.subscribe({
+				channel    : "hello_homework",      // CONNECT TO THIS CHANNEL.
+
+				restore    : false,              // STAY CONNECTED, EVEN WHEN BROWSER IS CLOSED
+				// OR WHEN PAGE CHANGES.
+
+				callback   : function(message) { // RECEIVED A MESSAGE.
+					var msg = 'Message recieved: <br />';
+					msg += message;
+					msg += '<br />' + (new Date).toUTCString() + '<br />';
+					$('#chat-room').prepend(msg);
+				},
+
+				disconnect : function() {        // LOST CONNECTION.
+					console.log(
+					"Connection Lost." +
+						"Will auto-reconnect when Online."
+					);
+				},
+
+				reconnect  : function() {        // CONNECTION RESTORED.
+					console.log("And we're Back!");
+				},
+
+				connect    : function() {        // CONNECTION ESTABLISHED.
+
+//					PUBNUB.publish({             // SEND A MESSAGE.
+//						channel : "hello_homework",
+//						message : "Hi Homework."
+//					});
+
+				}
+			})
+
+		})();</script>
+		<div id="chat-room" class="box">
+
+		</div>
+		<form action="" method="post" name="chat">
+			<textarea cols="20" rows="4" name="text" id="text"></textarea><br />
+			<input type="button" value="Send Message" id="send" />
+		</form>
+    </body>
+</html>
