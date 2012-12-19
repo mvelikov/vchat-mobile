@@ -30,7 +30,7 @@
                     <input type="password" name="pass" id="pass" class="field" placeholder="Password:" />
                 </div>
                 <div data-role="fieldcontain">
-                <input name="login_submit" class="field" id="login-submit" type="submit" value="Submit" />
+                <input name="login_submit" class="field" id="login-submit" type="submit" value="Submit" data-role="button" />
                 </div>
             </form>
         </div>
@@ -58,19 +58,34 @@
         <div data-role="popup" id="add-channel" class="ui-content" style="max-width: 500px;" data-corners="true">
             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
             <form action="#" id="channel-form" method="post" data-position-to="window" name="channel_form">
-                <div class="row">
-                    <div data-role="fieldcontain">
-                        <label for="channel-name">Name:</label>
-                        <input type="text" name="channel_name" id="channel-name" />
-                    </div>
-                    <input type="submit" value="Submit" id="submit-channel" name="submit_channel" />
+                <div data-role="fieldcontain">
+                    <label for="channel-name">Name:</label>
+                    <input type="text" name="channel_name" id="channel-name" />
                 </div>
+                <input type="submit" data-role="button" value="Submit" id="submit-channel" name="submit_channel" />
             </form>
+        </div>
+    </div>
+    <div id="chat" data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h1 id="channel-box"></h1>
+        </div>
+        <div data-role="content">
+            <div id="message-box" class="box"></div>
+            <form action="#" name="message_form" id="message-form" method="post">
+                <div class="row" data-role="fieldcontain">
+                    <label id="message-label" for="message" class="label">Message:</label>
+                    <textarea name="message" id="message" cols="20" rows="2" class="field"></textarea>
+                </div>
+                <input type="button" id="send" name="send" value="Send" class="field" />
+            </form>
+        </div>
+        <div data-role="footer" data-position="fixed">
         </div>
     </div>
 
     <form action="#" name="upload_file" id="upload-file" method="post" enctype="multipart/form-data">
-        <input id="userfile" type="file" name="userfile" class="field" />
+        <input id="userfile" type="file" name="userfile" class="field" data-role="none" style="display: none;"/>
     </form>
     <div id="overlay"><img id="loader" src="images/loading.gif" alt="Loading..." /></div>
 </body>

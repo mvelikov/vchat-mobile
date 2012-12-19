@@ -176,7 +176,7 @@ $(document).ready(function() {
                     if (typeof data === 'object'
                         && data.success === true
                         && data.failed === false) {
-                        html = '<li><a href="#" class="channels" data-channel-id="' + data.$id + '" title="' + escaped_channel + '">' + escaped_channel + '</a></li>'
+                        html = '<li class="channels"><a href="#" data-channel-id="' + data.$id + '" title="' + escaped_channel + '">' + escaped_channel + '</a></li>'
                     } else {
                         $("#error-message").html(data.message).show().fadeOut(5000);
                     }
@@ -190,6 +190,7 @@ $(document).ready(function() {
         }
     });
     $(".channels").on('tap', function(e) {
+        alert('a'); 
         e.preventDefault();
         $("#overlay").show();
         userObj.channel = $(this).attr('data-channel-id');
@@ -201,8 +202,7 @@ $(document).ready(function() {
         $("#message").focus();
         subscribe();
         $("#message-box").html('<a id="load-last-messages" href="#" title="Load last 10 messages">Load last 10 messages</a>');
-        $("#channels-list-page").css({display: 'none'});
-        $("#chat-room-page").css({display: 'block'});
+        $.mobile.changePage('#chat');
         skip = 0;
     });
     function loadChannelsList() {
