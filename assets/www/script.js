@@ -6,14 +6,14 @@ $(document).ready(function() {
     pubnub = {},
     base_href = 'http://vchat.eu01.aws.af.cm/';
 
-    $("#back-to-channels").on('click', function (e) {
+    $("#back-to-channels").on('tap', function (e) {
         e.preventDefault();
         pubnub.unsubscribe({channel : userObj.channel});
         $("#chat-room-page").css({display: 'none'});
         $("#channel-box").html('');
         $("#channels-list-page").css({display: 'block'});
     });
-    $("#login-submit").on('click', function (e) {
+    $("#login-submit").on('tap', function (e) {
         e.preventDefault();
         var user = $("#user").val(),
         pass = $("#pass").val();
@@ -67,7 +67,7 @@ $(document).ready(function() {
     //
     //        });
 
-    $("#send").on('click', function () {
+    $("#send").on('tap', function () {
         var text = $("#message").val(), escaped_text = escape(text);
         $("#message").val('');
         if (text != '') {
@@ -113,7 +113,7 @@ $(document).ready(function() {
 
         }
     });
-    $("#load-last-messages").on('click', function(e){
+    $("#load-last-messages").on('tap', function(e){
         e.preventDefault();
 
         $.ajax({
@@ -154,7 +154,12 @@ $(document).ready(function() {
             }
         })
     });
-    $("#submit-channel").on('click', function (e) {
+    $("#add-channel").on({
+        popupbeforeposition: function () {
+            $('.ui-popup-screen').off();
+        }
+    });
+    $("#submit-channel").on('tap', function (e) {
         e.preventDefault();
         var channel = $("#channel-name").val(),
         escaped_channel = escape(channel);
@@ -175,7 +180,8 @@ $(document).ready(function() {
                     } else {
                         $("#error-message").html(data.message).show().fadeOut(5000);
                     }
-                    $("#channels-list").append(html);
+                    $("#channels-list").append(html).listview('refresh');
+                    $('#add-channel').popup('close');
                 },
                 error : function (a,b) {
                     console.log(a,b);
@@ -183,7 +189,7 @@ $(document).ready(function() {
             });
         }
     });
-    $(".channels").on('click', function(e) {
+    $(".channels").on('tap', function(e) {
         e.preventDefault();
         $("#overlay").show();
         userObj.channel = $(this).attr('data-channel-id');

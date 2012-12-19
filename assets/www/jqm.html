@@ -47,18 +47,28 @@
             </ul>
         </div>
         <div data-role="footer" data-position="fixed">
-            <h4>&nbsp;</h4>
+            <div data-role="navbar">
+                <ul>
+                    <li>
+                        <a href="#add-channel" data-rel="popup" id="add-channel-btn">Add Channel</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div data-role="popup" id="add-channel">
-            <form action="#" id="channel-form" method="post" name="channel_form">
+        <div data-role="popup" id="add-channel" class="ui-content" style="max-width: 500px;" data-corners="true">
+            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            <form action="#" id="channel-form" method="post" data-position-to="window" name="channel_form">
                 <div class="row">
-                    <label for="channel-name">Name:</label>
-                    <input type="text" name="channel_name" id="channel-name" />
+                    <div data-role="fieldcontain">
+                        <label for="channel-name">Name:</label>
+                        <input type="text" name="channel_name" id="channel-name" />
+                    </div>
                     <input type="submit" value="Submit" id="submit-channel" name="submit_channel" />
                 </div>
             </form>
         </div>
     </div>
+
     <form action="#" name="upload_file" id="upload-file" method="post" enctype="multipart/form-data">
         <input id="userfile" type="file" name="userfile" class="field" />
     </form>
