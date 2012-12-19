@@ -6,14 +6,14 @@ $(document).ready(function() {
     pubnub = {},
     base_href = 'http://vchat.eu01.aws.af.cm/';
 
-    $("#back-to-channels").live('click', function (e) {
+    $("#back-to-channels").on('click', function (e) {
         e.preventDefault();
         pubnub.unsubscribe({channel : userObj.channel});
         $("#chat-room-page").css({display: 'none'});
         $("#channel-box").html('');
         $("#channels-list-page").css({display: 'block'});
     });
-    $("#login-submit").live('click', function (e) {
+    $("#login-submit").on('click', function (e) {
         e.preventDefault();
         var user = $("#user").val(),
         pass = $("#pass").val();
@@ -67,7 +67,7 @@ $(document).ready(function() {
     //
     //        });
 
-    $("#send").live('click', function () {
+    $("#send").on('click', function () {
         var text = $("#message").val(), escaped_text = escape(text);
         $("#message").val('');
         if (text != '') {
@@ -113,7 +113,7 @@ $(document).ready(function() {
 
         }
     });
-    $("#load-last-messages").live('click', function(e){
+    $("#load-last-messages").on('click', function(e){
         e.preventDefault();
 
         $.ajax({
@@ -154,7 +154,7 @@ $(document).ready(function() {
             }
         })
     });
-    $("#submit-channel").live('click', function (e) {
+    $("#submit-channel").on('click', function (e) {
         e.preventDefault();
         var channel = $("#channel-name").val(),
         escaped_channel = escape(channel);
@@ -183,7 +183,7 @@ $(document).ready(function() {
             });
         }
     });
-    $(".channels").live('click', function(e) {
+    $(".channels").on('click', function(e) {
         e.preventDefault();
         $("#overlay").show();
         userObj.channel = $(this).attr('data-channel-id');
@@ -214,8 +214,8 @@ $(document).ready(function() {
                     }
                 }
                 $("#channels-list").html(html);
-                $("#login-form").css({display: 'none'});
-                $("#channels-list-page").css({display: 'block'});
+                $.mobile.changePage('#channels');
+                //$("#channels-list").listview('refresh');
                 $("#overlay").hide();
             },
             error : function (a, b) {

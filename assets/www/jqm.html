@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scale=no" />
+    <title>VChat</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="jqm/jquery.mobile-1.2.0.min.css" />
+    <script src="jqm/jquery-1.8.2.min.js"></script>
+    <script src="jqm/jquery.mobile-1.2.0.min.js"></script>
+    <script src="js/ajaxupload.js"></script>
+    <script src="js/pubnub-3.3.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="home" data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h1>Login</h1>
+        </div>
+        <div data-role="content">
+            <div id="error-message"></div>
+            <div id="user-box"></div>
+            <form name="login_form" id="login-form" method="post" action="#">
+                <div data-role="fieldcontain">
+                    <label class="label" for="user">User:</label>
+                    <input type="text" name="user" id="user" class="field" placeholder="User:" />
+                </div>
+                <div data-role="fieldcontain">
+                    <label class="label" for="pass">Password:</label>
+                    <input type="password" name="pass" id="pass" class="field" placeholder="Password:" />
+                </div>
+                <div data-role="fieldcontain">
+                <input name="login_submit" class="field" id="login-submit" type="submit" value="Submit" />
+                </div>
+            </form>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <h4>&nbsp;</h4>
+        </div>
+    </div>
+    <div id="channels" data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h1>Channels</h1>
+        </div>
+        <div data-role="content">
+            <ul id="channels-list" class="list box" data-role="listview">
+            </ul>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <h4>&nbsp;</h4>
+        </div>
+        <div data-role="popup" id="add-channel">
+            <form action="#" id="channel-form" method="post" name="channel_form">
+                <div class="row">
+                    <label for="channel-name">Name:</label>
+                    <input type="text" name="channel_name" id="channel-name" />
+                    <input type="submit" value="Submit" id="submit-channel" name="submit_channel" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <form action="#" name="upload_file" id="upload-file" method="post" enctype="multipart/form-data">
+        <input id="userfile" type="file" name="userfile" class="field" />
+    </form>
+    <div id="overlay"><img id="loader" src="images/loading.gif" alt="Loading..." /></div>
+</body>
+</html>
