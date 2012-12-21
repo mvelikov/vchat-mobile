@@ -23,11 +23,11 @@
             <form name="login_form" id="login-form" method="post" action="#">
                 <div data-role="fieldcontain">
                     <label class="label" for="user">User:</label>
-                    <input type="text" name="user" id="user" class="field" placeholder="User:" />
+                    <input type="text" name="user" id="user" class="field" placeholder="User:" value="test"/>
                 </div>
                 <div data-role="fieldcontain">
                     <label class="label" for="pass">Password:</label>
-                    <input type="password" name="pass" id="pass" class="field" placeholder="Password:" />
+                    <input type="password" name="pass" id="pass" class="field" placeholder="Password:" value="test" />
                 </div>
                 <div data-role="fieldcontain">
                 <input name="login_submit" class="field" id="login-submit" type="submit" value="Submit" data-role="button" />
@@ -44,6 +44,9 @@
         </div>
         <div data-role="content">
             <ul id="channels-list" class="list box" data-role="listview">
+                <li>
+                    <a href="http://google.com">Google</a>
+                </li>
             </ul>
         </div>
         <div data-role="footer" data-position="fixed">

@@ -6,14 +6,14 @@ $(document).ready(function() {
     pubnub = {},
     base_href = 'http://vchat.eu01.aws.af.cm/';
 
-    $("#back-to-channels").on('tap', function (e) {
+    $(document).on('tap', "#back-to-channels", function (e) {
         e.preventDefault();
         pubnub.unsubscribe({channel : userObj.channel});
         $("#chat-room-page").css({display: 'none'});
         $("#channel-box").html('');
         $("#channels-list-page").css({display: 'block'});
     });
-    $("#login-submit").on('tap', function (e) {
+    $(document).on('tap', "#login-submit", function (e) {
         e.preventDefault();
         var user = $("#user").val(),
         pass = $("#pass").val();
@@ -27,6 +27,7 @@ $(document).ready(function() {
                     'pass' : pass
                 },
                 success : function (data) {
+                    //alert('success');
                     if (typeof data !== 'undefined'
                         && data.success === true
                         && data.failed === false) {
@@ -43,9 +44,12 @@ $(document).ready(function() {
                     }
                 },
                 error : function (error, type) {
+                    console.log(error);
+                    console.log(type);
+                    //alert('failed');
                     $("#user-box").html('').hide();
                     $("#overlay").hide();
-                    $("#error-message").html('Please use https connection').show().fadeOut(5000);
+                    $("#error-message").html('Login failed').show();
                     userObj = {};
                 }
             });
@@ -67,7 +71,7 @@ $(document).ready(function() {
     //
     //        });
 
-    $("#send").on('tap', function () {
+    $(document).on('tap', "#send", function () {
         var text = $("#message").val(), escaped_text = escape(text);
         $("#message").val('');
         if (text != '') {
@@ -113,7 +117,7 @@ $(document).ready(function() {
 
         }
     });
-    $("#load-last-messages").on('tap', function(e){
+    $(document).on('tap', "#load-last-messages", function(e){
         e.preventDefault();
 
         $.ajax({
@@ -159,7 +163,7 @@ $(document).ready(function() {
             $('.ui-popup-screen').off();
         }
     });
-    $("#submit-channel").on('tap', function (e) {
+    $(document).on('tap', "#submit-channel", function (e) {
         e.preventDefault();
         var channel = $("#channel-name").val(),
         escaped_channel = escape(channel);
@@ -176,7 +180,7 @@ $(document).ready(function() {
                     if (typeof data === 'object'
                         && data.success === true
                         && data.failed === false) {
-                        html = '<li class="channels"><a href="#" data-channel-id="' + data.$id + '" title="' + escaped_channel + '">' + escaped_channel + '</a></li>'
+                        html = '<li><a href="#chat" class="channels" data-channel-id="' + data.$id + '" title="' + escaped_channel + '">' + escaped_channel + '</a></li>';
                     } else {
                         $("#error-message").html(data.message).show().fadeOut(5000);
                     }
@@ -189,9 +193,9 @@ $(document).ready(function() {
             });
         }
     });
-    $(".channels").on('tap', function(e) {
+    $(document).on('tap', '.channels', function(e) {
         alert('a'); 
-        e.preventDefault();
+        //e.preventDefault();
         $("#overlay").show();
         userObj.channel = $(this).attr('data-channel-id');
         $("#channel-box").html('Channel: ' + $(this).html());
@@ -216,10 +220,11 @@ $(document).ready(function() {
                 var html = '';
                 if (typeof data === 'object') {
                     for (var i in data) {
-                        html += '<li><a href="#" class="channels" data-channel-id="' + data[i]._id + '" title="' + data[i].name + '">' + data[i].name + '</a></li>'
+                        html += '<li><a href="#chat" class="channels" data-channel-id="' + data[i]._id + '" title="' + data[i].name + '">' + data[i].name + '</a></li>';
+                        console.log(html);
                     }
                 }
-                $("#channels-list").html(html);
+                $("#channels-list").append(html);
                 $.mobile.changePage('#channels');
                 //$("#channels-list").listview('refresh');
                 $("#overlay").hide();
@@ -328,48 +333,4 @@ $(document).ready(function() {
             $("#send").prop('disabled', true);
         }
     });
-//    $('#userfile').live('change', function(e){
-//        $(this).prop('disabled', true);
-//        console.log("click");
-//    });
-/*$('#userfile').fileupload({
-    url: base_href + 'file/index',
-    maxFileSize: 10000000,
-    dataType: 'json',
-    done: function (e, data) {
-        console.log(e, data);
-        $.each(data.result, function (index, file) {
-            $('<p/>').text(file.name).appendTo(document.body);
-        });
-    }
-});*/
-/*$("#upload-file").submit(function (e) {
-    e.preventDefault();
-    $.ajaxFileUpload({
-        url: base_href + 'file/alt',
-        secureuri:true,
-        fileElementId:'userfile',
-        dataType: 'json',
-        data:{'pass' : userObj.pass},
-        success: function (data, status)
-        {
-            console.log(data, status);
-            if(typeof(data.error) != 'undefined')
-            {
-                if(data.error != '')
-                {
-                    alert(data.error);
-                }else
-                {
-                    alert(data.msg);
-                }
-            }
-        },
-        error: function (data, status, e)
-        {
-            console.log('error ', data, status, e);
-        }
-    });
-    return false;
-});*/
 });
